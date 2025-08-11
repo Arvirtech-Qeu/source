@@ -1,0 +1,10 @@
+{
+	"deploymentSno":13
+	"serviceSno":3,
+	"host":"localhost",
+	"port":8899,
+	"ssl":false,
+	"config.path":"/api/qbox-boot/get_deployment_config"
+	"security.path":"/api/qbox-boot/get_deployment_crypto_data",
+	"local.path": "uploads/"
+}

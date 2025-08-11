@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.stockReport>select,
+.transaction-date {
+    margin-right: 10px;
+}
+
+.stockReport>button,
+.transaction-button {
+    margin-left: 30px;
+}
+

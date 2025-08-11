@@ -1,0 +1,7 @@
+{
+	"deploymentSno":11,
+	"serviceSno":1
+	"host":"localhost",
+	"port":8899,
+	"ssl":true
+}

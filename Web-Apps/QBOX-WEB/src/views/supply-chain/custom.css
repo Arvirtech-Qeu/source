@@ -1,0 +1,25 @@
+/* Custom Scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 100%;
+    /* Thin scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Light gray background for the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    /* Orange color for the draggable part */
+    border-radius: 10px;
+    /* Rounded thumb */
+    border: 2px solid #f1f1f1;
+    /* Optional: Adds a border around the thumb for contrast */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+    /* Darker orange when hovered */
+}

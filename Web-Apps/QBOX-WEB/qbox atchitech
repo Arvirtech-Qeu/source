@@ -1,0 +1,95 @@
+/your-project
+│
+├── /public/                       # Public assets (HTML, images, favicon, etc.)
+│   ├── index.html                 # Main HTML template
+│   ├── favicon.ico                # Favicon
+│   └── /assets/                   # Static assets like fonts, icons, etc.
+│       └── /fonts/                # Fonts used globally in the app
+│
+├── /src/                          # Source code
+│   ├── /assets/                   # Static assets, images, fonts, global styles, etc.
+│   │   ├── /images/               # Image assets
+│   │   ├── /fonts/                # Font assets (e.g., Google Fonts or local fonts)
+│   │   
+│   │
+│   ├── /components/               # Reusable UI components
+│   │   ├── Button.tsx             # Example of a reusable button component (Tailwind styled)
+│   │   ├── Modal.tsx              # Modal component
+│   │   ├── Input.tsx              # Reusable input component
+│   │   └── /icons/                # SVG or icon components
+│   │       └── CloseIcon.tsx      # Example of an icon component
+│   │
+│   ├── /containers/               # Page or route components (views)
+│   │   ├── Dashboard.tsx          # Dashboard page component
+│   │   ├── HomePage.tsx           # Homepage component
+│   │   └── Profile.tsx            # Profile page component
+│   │
+│   │
+│   ├── /hooks/                    # Custom React hooks
+│   │   ├── useAuth.ts             # Custom hook for authentication
+│   │   ├── useFetch.ts            # Custom hook for API data fetching
+│   │   └── useLocalStorage.ts     # Custom hook for managing localStorage
+│   │
+│   ├── /services/                 # Business logic, API calls, authentication services
+│   │   ├── authService.ts         # Authentication logic (login, logout)
+│   │   ├── apiService.ts          # General API service for network requests
+│   │   ├── userService.ts         # User-related actions (e.g., fetching profile)
+│   │   └── themeService.ts        # Logic for switching themes (light/dark)
+│   │
+│   ├── /state/                    # Global state management (Redux, Zustand, Recoil, Context API)
+│   │   ├── store.ts               # Redux store or Zustand/Recoil state manager
+│   │   ├── userSlice.ts           # Redux slice for user-related state (if using Redux)
+│   │   └── themeSlice.ts          # Redux slice for theme-related state (if using Redux)
+│   │
+│   ├── /context/                  # React Context API for scoped state management
+│   │   ├── AuthContext.tsx        # Context for authentication state
+│   │   ├── ThemeContext.tsx       # Context for UI theme (light/dark mode)
+│   │   └── ModalContext.tsx       # Context for modal visibility and control
+│   │
+│   ├── /i18n/                     # Internationalization (i18n) configuration
+│   │   ├── i18n.ts                # react-i18next configuration
+│   │   └── /locales/              # Translations for different languages
+│   │       ├── en.json            # English translations
+│   │       └── fr.json            # French translations
+│   │
+│   ├── /types/                    # TypeScript types
+│   │   ├── userTypes.ts           # Types for user-related data
+│   │   ├── apiTypes.ts            # Types for API responses
+│   │   └── themeTypes.ts          # Types for theme management (light/dark)
+│   │
+│   ├── /utils/                    # Utility functions and helpers
+│   │   ├── validators.ts          # Helper functions for form validation
+│   │   ├── formatters.ts          # Helper functions for formatting dates, currency, etc.
+│   │   └── storage.ts             # Helper functions for localStorage/sessionStorage
+│   │
+│   ├── /tests/                    # Test files (unit and integration tests)
+│   │   ├── /unit/                 # Unit tests for components or utilities
+│   │   │   ├── Button.test.tsx    # Test for Button component
+│   │   │   └── Input.test.tsx     # Test for Input component
+│   │   ├── /integration/          # Integration tests (component interaction)
+│   │   │   ├── Dashboard.test.tsx # Test for Dashboard component
+│   │   │   └── HomePage.test.tsx  # Test for HomePage component
+│   │   └── /e2e/                  # End-to-end tests (Cypress, Playwright)
+│   │       ├── login.spec.ts      # Login test
+│   │       └── profile.spec.ts    # Profile test
+│   │
+│   ├── /views/                    # Full-page views routed via React Router
+│   │   ├── Login.tsx              # Login page component
+│   │   ├── Register.tsx           # Registration page component
+│   │   └── NotFound.tsx           # 404 page component
+│   │
+│   ├── /App.tsx                   # Main React component (root app)
+│   ├── /index.tsx                 # App entry point for rendering the app
+│   ├── /routes.tsx                # Route definitions (React Router setup)
+│   ├── /globalState.tsx           # Global app state initialization (Context API, Redux provider)
+│   ├── /serviceWorker.ts          # Service Worker setup for offline support (PWA)
+│   ├── /theme.tsx                 # Global theme management logic (light/dark mode)
+│   └── /history.tsx               # History management for routing (optional, if using custom routing)
+│
+├── /node_modules/                 # Node.js dependencies
+├── .env                           # Environment variables (e.g., API keys, feature flags)
+├── .gitignore                     # Git ignore file
+├── package.json                   # Project metadata, dependencies, scripts
+├── README.md                      # Documentation and instructions
+├── tsconfig.json                  # TypeScript configuration
+└── vite.config.ts                 # Vite configuration (build, plugins, etc.)

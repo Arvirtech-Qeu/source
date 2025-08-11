@@ -1,0 +1,30 @@
+/* Background color for light theme */
+.bg-light {
+    background-color: var(--neutralWhite);
+}
+
+/* Background color for dark theme */
+.dark .bg-light {
+    background-color: var(--neutralLightGray);
+}
+
+/* Text color for light theme */
+.text-light {
+    color: var(--darkText);
+}
+
+/* Text color for dark theme */
+.dark .text-light {
+    color: var(--lightText);
+}
+
+/* Button colors */
+.bg-primary {
+    background-color: var(--primary);
+}
+
+.dark .bg-primary {
+    background-color: var(--darkGreen);
+}
+
+/* You can apply the above classes wherever needed in your components */

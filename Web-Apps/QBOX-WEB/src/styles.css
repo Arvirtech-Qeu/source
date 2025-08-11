@@ -1,0 +1,397 @@
+/* Background color for light theme */
+.bg-light {
+  background-color: var(--neutralWhite);
+}
+
+/* Background color for dark theme */
+.dark .bg-light {
+  background-color: var(--neutralLightGray);
+}
+
+/* Text color for light theme */
+.text-light {
+  color: var(--darkText);
+}
+
+/* Text color for dark theme */
+.dark .text-light {
+  color: var(--lightText);
+}
+
+/* Button colors */
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.dark .bg-primary {
+  background-color: var(--darkGreen);
+}
+
+/* You can apply the above classes wherever needed in your components */
+
+/* Theme colors */
+
+
+/* Base styles */
+:root {
+  /* Blue theme */
+
+  /* 00008B */
+  --blue-primary: #0047AB;
+  --blue-primary-rgb: 66, 133, 244;
+  --blue-hover-bg: #e0f0ff;
+  --blue-menu-bg: #a4d3ff;
+
+  --blue-secondary: #34a853;
+  --blue-secondary-rgb: 52, 168, 83;
+
+  /* Red theme */
+
+  /* red -- ea4335 */
+  /* 8B0000 */
+
+  --red-primary: #ea4335;
+  --red-primary-rgb: 234, 67, 53;
+  --red-hover-bg: #ffdfdf;
+  --red-menu-bg: #ffa6a6;
+
+  --red-secondary: #fbbc05;
+  --red-secondary-rgb: 251, 188, 5;
+
+  /* Orange theme */
+
+  /* FFA500 */
+  --orange-primary: #DC582A;
+  --orange-primary-rgb: 255, 187, 51;
+  --orange-hover-bg: #ffeccd;
+  --orange-menu-bg: #ffdda6;
+
+  --orange-secondary: #0f9d58;
+  --orange-secondary-rgb: 15, 157, 88;
+
+  /* Purple theme */
+  --purple-primary: #9c27b0;
+  --purple-primary-rgb: 156, 39, 176;
+  --purple-hover-bg: #f5e6fb;
+  --purple-menu-bg: #e5a4ff;
+
+  --purple-secondary: #673ab7;
+  --purple-secondary-rgb: 103, 58, 183;
+
+  /* Default theme */
+  --primary-color: var(--blue-primary);
+  --secondary-color: var(--blue-secondary);
+  --primary-color-rgb: var(--blue-primary-rgb);
+  --hover-bg-color: var(--blue-hover-bg);
+  --menu-bg-color: var(--blue-menu-bg);
+}
+
+
+/* Theme classes */
+.blue {
+  --primary-color: var(--blue-primary);
+  --secondary-color: var(--blue-secondary);
+  --primary-color-rgb: var(--blue-primary-rgb);
+  --hover-bg-color: var(--blue-hover-bg);
+  --menu-bg-color: var(--blue-menu-bg);
+}
+
+.red {
+  --primary-color: var(--red-primary);
+  --secondary-color: var(--red-secondary);
+  --primary-color-rgb: var(--red-primary-rgb);
+  --hover-bg-color: var(--red-hover-bg);
+  --menu-bg-color: var(--red-menu-bg);
+}
+
+.orange {
+  --primary-color: var(--orange-primary);
+  --secondary-color: var(--orange-secondary);
+  --primary-color-rgb: var(--orange-primary-rgb);
+  --hover-bg-color: var(--orange-hover-bg);
+  --menu-bg-color: var(--orange-menu-bg);
+}
+
+.purple {
+  --primary-color: var(--purple-primary);
+  --secondary-color: var(--purple-secondary);
+  --primary-color-rgb: var(--purple-primary-rgb);
+  --hover-bg-color: var(--purple-hover-bg);
+  --menu-bg-color: var(--purple-menu-bg);
+}
+
+
+/* Theme switcher styles */
+.theme-switcher-container {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-settings-button {
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 120px;
+}
+
+.theme-option {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-option:hover {
+  opacity: 0.9;
+}
+
+.theme-option.active {
+  font-weight: bold;
+  border-left: 3px solid white;
+}
+
+/* Example of using theme colors */
+.header {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white !important;
+}
+
+.border-color {
+  border-color: var(--primary-color);
+}
+
+.low-bg-color {
+  background-color: rgba(var(--primary-color-rgb), 0.1) !important;
+}
+
+
+.bg-color {
+  background-color: var(--primary-color) !important;
+}
+
+.menu-item:hover {
+  background-color: var(--hover-bg-color) !important;
+}
+
+.hovered-border:hover {
+  border-color: var(--primary-color);
+}
+
+.text-color {
+  color: var(--primary-color) !important;
+}
+
+
+.ring-color {
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.5) !important;
+  /* blue-500 with 50% opacity */
+}
+
+.custom-gradient-left {
+  background: linear-gradient(to left,
+      rgba(var(--primary-color-rgb), 0.1),
+      var(--primary-color),
+      rgba(var(--primary-color-rgb), 0.1));
+}
+
+.custom-gradient-right {
+  background: linear-gradient(to right,
+      var(--primary-color),
+      var(--primary-color),
+      rgba(var(--primary-color-rgb), 0.1));
+}
+
+.custom-gradient-center {
+  background: linear-gradient(to right,
+      rgba(var(--primary-color-rgb), 0.8) 0%,
+      rgba(var(--primary-color-rgb), 0.1) 50%,
+      rgba(var(--primary-color-rgb), 0.8) 100%);
+}
+
+
+
+select:focus,
+input:focus {
+  border: 1px solid var(--primary-color) !important;
+  box-shadow: none !important;
+}
+
+.header-search:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.menu-background-color {
+  background-color: var(--menu-bg-color);
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hover\:shadow-lg:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.map-slide-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(0);
+}
+
+.map-slide-panel.closed {
+  transform: translateX(100%);
+}
+
+/* Rejection Details Modal Styles */
+.rejection-details-modal .ant-modal-body {
+  padding: 20px;
+}
+
+.rejection-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rejection-tag {
+  font-weight: 500;
+  padding: 2px 8px;
+}
+
+.sku-code {
+  font-family: monospace;
+  color: #666;
+}
+
+.rejection-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.detail-icon {
+  color: #888;
+  margin-top: 2px;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.detail-value {
+  color: #333;
+}
+
+.detail-value.reason {
+  color: #f5222d;
+  font-weight: 500;
+}
+
+.rejection-images-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rejection-images-carousel {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-image-wrapper {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.rejection-image {
+  max-height: 200px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.image-counter {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.no-image-placeholder {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-image {
+  border-radius: 4px;
+  background: #f5f5f5;
+}
+
+.no-image-text {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+.preview-mask {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  font-size: 14px;
+}
+
+.rejection-divider {
+  margin: 16px 0;
+}
