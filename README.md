@@ -37,7 +37,7 @@ Test case documents, QA reports, and test coverage details are available in the 
 ## 📌 Notes
 - This repository is for **handover purposes only**.
 - Ensure to update configuration values in `.env` files before deployment.
-- For any clarifications, contact **Vengatesan Kalimuthu**.
+- For any clarifications, contact **SWOMB Team**.
 
 ---
 © 2025 Arvirtech – QeuBox Project
