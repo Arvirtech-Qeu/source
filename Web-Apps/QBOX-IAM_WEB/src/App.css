@@ -1,0 +1,12 @@
+.aside::-webkit-scrollbar{
+    display:none;
+}
+ 
+/* body{
+    overflow-x: hidden !important;
+} */
+ 
+.role::-webkit-scrollbar{
+    display: none;
+}
+ 

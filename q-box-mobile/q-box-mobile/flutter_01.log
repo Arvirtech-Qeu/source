@@ -1,0 +1,117 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter pub get
+
+## exception
+
+PathNotFoundException: PathNotFoundException: Cannot open file, path = '/home/swomb/snap/flutter/common/flutter/version' (OS Error: No such file or directory, errno = 2)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:782:7)
+#1      _File.openSync (dart:io/file_impl.dart:575:5)
+#2      _File.writeAsBytesSync (dart:io/file_impl.dart:747:31)
+#3      _File.writeAsStringSync (dart:io/file_impl.dart:775:5)
+#4      ForwardingFile.writeAsStringSync (package:file/src/forwarding/forwarding_file.dart:150:16)
+#5      ErrorHandlingFile.writeAsStringSync.<anonymous closure> (package:flutter_tools/src/base/error_handling_io.dart:254:22)
+#6      _runSync (package:flutter_tools/src/base/error_handling_io.dart:549:14)
+#7      ErrorHandlingFile.writeAsStringSync (package:flutter_tools/src/base/error_handling_io.dart:253:5)
+#8      _ensureLegacyVersionFile (package:flutter_tools/src/version.dart:651:23)
+#9      _FlutterVersionFromFile.ensureVersionFile (package:flutter_tools/src/version.dart:551:5)
+#10     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:446:32)
+<asynchronous suspension>
+#11     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#12     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:431:5)
+<asynchronous suspension>
+#13     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:98:11)
+<asynchronous suspension>
+#14     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+<asynchronous suspension>
+#15     main (package:flutter_tools/executable.dart:102:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[31m[☠][39m Flutter (the doctor check crashed)
+    [31m✗[39m Due to an error, the doctor check did not complete. If the error message below is not helpful, please let us know about this issue at
+      https://github.com/flutter/flutter/issues.
+    [31m✗[39m Exception: Could not find directory at /home/swomb/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/resources/devtools
+    [32m•[39m #0      Cache.devToolsVersion (package:flutter_tools/src/cache.dart:429:9)
+      #1      _DefaultDoctorValidatorsProvider.validators.<anonymous closure> (package:flutter_tools/src/doctor.dart:138:46)
+      #2      FlutterValidator.validateImpl (package:flutter_tools/src/doctor.dart:594:84)
+      #3      DoctorValidator.validate (package:flutter_tools/src/doctor_validator.dart:58:43)
+      #4      Doctor.startValidatorTasks.<anonymous closure> (package:flutter_tools/src/doctor.dart:244:72)
+      #5      asyncGuard.<anonymous closure> (package:flutter_tools/src/base/async_guard.dart:109:34)
+      #6      _rootRun (dart:async/zone.dart:1525:13)
+      #7      _CustomZone.run (dart:async/zone.dart:1422:19)
+      #8      _runZoned (dart:async/zone.dart:2033:6)
+      #9      runZonedGuarded (dart:async/zone.dart:2019:12)
+      #10     runZoned (dart:async/zone.dart:1952:12)
+      #11     asyncGuard (package:flutter_tools/src/base/async_guard.dart:106:3)
+      #12     Doctor.startValidatorTasks (package:flutter_tools/src/doctor.dart:234:9)
+      #13     DoctorText._validatorTasks (package:flutter_tools/src/doctor.dart:827:60)
+      #14     DoctorText._validatorTasks (package:flutter_tools/src/doctor.dart)
+      #15     DoctorText._runDiagnosis (package:flutter_tools/src/doctor.dart:832:32)
+      #16     DoctorText.text (package:flutter_tools/src/doctor.dart:823:36)
+      #17     DoctorText.text (package:flutter_tools/src/doctor.dart)
+      #18     _createLocalCrashReport (package:flutter_tools/runner.dart:274:51)
+      #19     _handleToolError (package:flutter_tools/runner.dart:235:31)
+      <asynchronous suspension>
+      #20     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:154:19)
+      <asynchronous suspension>
+      #21     main (package:flutter_tools/executable.dart:102:3)
+      <asynchronous suspension>
+
+
+[32m[✓][39m Android toolchain - develop for Android devices (Android SDK version 35.0.1) [3.1s]
+    [32m•[39m Android SDK at /home/swomb/Android/Sdk
+    [32m•[39m Platform android-35, build-tools 35.0.1
+    [32m•[39m Java binary at: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+      This JDK is specified in your Flutter configuration.
+      To change the current JDK, run: `flutter config --jdk-dir="path/to/jdk"`.
+    [32m•[39m Java version OpenJDK Runtime Environment (build 17.0.15+6-Ubuntu-0ubuntu122.04)
+    [32m•[39m All Android licenses accepted.
+
+[32m[✓][39m Chrome - develop for the web [192ms]
+    [32m•[39m Chrome at google-chrome
+
+[32m[✓][39m Linux toolchain - develop for Linux desktop [596ms]
+    [32m•[39m Ubuntu clang version 14.0.0-1ubuntu1.1
+    [32m•[39m cmake version 3.22.1
+    [32m•[39m ninja version 1.10.1
+    [32m•[39m pkg-config version 0.29.2
+    [33m![39m Unable to access driver information using 'eglinfo'.
+      It is likely available from your distribution (e.g.: apt install mesa-utils)
+
+[32m[✓][39m Android Studio (version 2024.3) [188ms]
+    [32m•[39m Android Studio at /snap/android-studio/191
+    [32m•[39m Flutter plugin version 83.0.4
+    [32m•[39m Dart plugin version 243.23654.44
+    [32m•[39m Java version OpenJDK Runtime Environment (build 21.0.6+-13355223-b631.42)
+
+[32m[✓][39m VS Code (version unknown) [15ms]
+    [32m•[39m VS Code at /usr/share/code
+    [32m•[39m Flutter extension version 3.112.0
+    [31m✗[39m Unable to determine VS Code version.
+
+[32m[✓][39m VS Code (version unknown) [15ms]
+    [32m•[39m VS Code at /snap/code/current/usr/share/code
+    [32m•[39m Flutter extension version 3.112.0
+    [31m✗[39m Unable to determine VS Code version.
+
+[32m[✓][39m Connected device (3 available) [227ms]
+    [32m•[39m CPH2569 (wireless) (mobile) • adb-6f3cbeeb-xlAusd._adb-tls-connect._tcp • android-arm64  • Android 15 (API 35)
+    [32m•[39m Linux (desktop)             • linux                                     • linux-x64      • Ubuntu 22.04.4 LTS 6.8.0-60-generic
+    [32m•[39m Chrome (web)                • chrome                                    • web-javascript • Google Chrome 127.0.6533.72
+
+[33m[!][39m Network resources [1,351ms]
+    [31m✗[39m A cryptographic error occurred while checking "https://pub.dev/": Handshake error in client
+      You may be experiencing a man-in-the-middle attack, your network may be compromised, or you may have malware installed on your computer.
+
+[33m![39m Doctor found issues in 2 categories.
+```

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "943263543680",
+    "project_id": "qbox-pushnotification",
+    "storage_bucket": "qbox-pushnotification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943263543680:android:dd0cc860d4df943c2ad165",
+        "android_client_info": {
+          "package_name": "com.example.qr_page"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKpwwqo3Guxa6JSauuB0ev3jin4AbPRlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

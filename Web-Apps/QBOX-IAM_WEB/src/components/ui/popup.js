@@ -1,0 +1,8 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import * as LucideIcons from 'lucide-react';
+const Popup = ({ IsPopupOpen, icon, confirmSave, cancelSave, Description, option1, }) => {
+    if (!IsPopupOpen)
+        return null;
+    return (_jsx(_Fragment, { children: IsPopupOpen && (_jsxs("div", { className: "fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center", children: [_jsx("div", { className: "absolute inset-0 bg-black/10" }), _jsxs("div", { className: "relative bg-white p-8 drop-shadow-2xl max-w-lg w-full mx-4 rounded-lg", children: [_jsx("button", { onClick: cancelSave, className: "absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none", children: _jsx(LucideIcons.X, { className: "w-6 h-6" }) }), _jsxs("div", { className: "flex items-center justify-center space-x-2 mb-8", children: [icon && _jsx("div", { className: "mr-2", children: icon }), _jsx("span", { className: "font-bold text-2xl text-emerald-600", children: "AuthTool" })] }), _jsx("div", { className: "relative", children: _jsx("h3", { className: "text-xl font-bold text-center mb-8 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200", children: Description }) }), _jsx("div", { className: "flex justify-center space-x-4 mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-300", children: _jsx("button", { onClick: confirmSave, className: "group relative bg-emerald-600 text-white py-2.5 px-8 rounded-lg overflow-hidden", children: _jsx("span", { className: "relative z-1", children: option1 }) }) })] })] })) }));
+};
+export default Popup;

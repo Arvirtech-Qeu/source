@@ -1,0 +1,43 @@
+/* MyForm.css */
+.my-form-container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ebedf0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.my-select {
+  width: 100%;
+  border-radius: 8px;
+  border-color: transparent !important; 
+}
+
+.my-select-dropdown {
+  border-radius: 8px;
+}
+
+.my-submit-button {
+  width: 100%;
+}
+.ant-select-focused .ant-select-selector {
+  border-color: transparent !important; /* Set border color to transparent when focused */
+  box-shadow: none; /* Remove box shadow when focused */
+}
+.ant-select-selector {
+  border-color: #ebedf0 !important; /* Set border color to transparent when focused */
+  box-shadow: none; /* Remove box shadow when focused */
+
+}
+
+.ant-input:focus {
+  border-color:  #ebedf0 !important; /* Use whatever border color you want */
+  box-shadow: none; /* Remove box shadow */
+}
+
+
+.ant-input {
+  border-color:  #ebedf0 !important; /* Use whatever border color you want */
+  box-shadow: none; /* Remove box shadow */
+}

@@ -1,0 +1,305 @@
+import { FlexibleTable } from '@/components/FlexibleTable';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { checkRoleNameExists, createRole, getAllRole, updateRole } from '@/redux/features/roleSlice';
+import { RootState } from '@/redux/store';
+import { isSaveDisabled, validateFieldOnBlur } from '@/utils/validation';
+import React, { useCallback, useEffect, useState } from 'react'
+import { IoSaveOutline } from 'react-icons/io5';
+import { useDispatch, useSelector } from 'react-redux';
+import { debounce } from "lodash";
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { FaRegCheckCircle } from 'react-icons/fa';
+
+export default function Role() {
+
+    const dispatch = useDispatch();
+    const { roleList, createRoleResult } = useSelector((state: RootState) => state.roleSlice)
+    const [isEditMode, setIsEditMode] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [errors, setErrors] = useState<any>({});
+    const [nameExistsError, setNameExistsError] = useState<any>({});
+
+    useEffect(() => {
+        dispatch(getAllRole({}))
+    }, [dispatch, createRoleResult])
+
+    // Adjust debounce time (in ms) as needed
+    useEffect(() => {
+        return () => {
+            debouncedCheckRoleName.cancel();
+        };
+    }, []);
+
+    const roleData = roleList && roleList.length > 0
+        ? roleList.map((role: any) => ({
+            roleId: role.roleId,
+            roleName: role.roleName,
+            auditTrialId: role.auditTrialId,
+            mediaLink: role.mediaLink,
+            isActive: role.isActive ? "Active" : "InActive"
+
+        })) : [];
+
+    const [formData, setFormData]: any = useState({
+        roleId: null,
+        roleName: '',
+        mediaLink: '',
+        auditTrialId: '',
+        isActive: 'Active',
+    });
+
+    const validationRules = {
+        roleName: { required: true, displayName: "Role Name" },
+    };
+
+    const resetForm = () => {
+        setFormData({
+            roleId: null,
+            roleName: '',
+            mediaLink: '',
+            isActive: true,
+            auditTrailId: '',
+            action: ''
+        });
+        setErrors({});
+    };
+
+    const roleTableConfig = [
+        { key: "roleName", header: "Role Name", sortable: true, filterable: true },
+        { key: "mediaLink", header: "Media Link", sortable: true, filterable: false },
+        {
+            key: "isActive",
+            header: "Status",
+            sortable: true,
+            filterable: true,
+            render: (value: string) => (
+                <span className={`px-2 py-1 text-sm font-medium rounded ${value === "Active" ? "text-green-500" : "text-gray-500"}`}>
+                    {value}
+                </span>
+            ),
+        },
+    ];
+
+    const handleAdd = () => {
+        setIsEditMode(false);
+        setIsPopupOpen(true);
+        resetForm();
+    };
+
+    const closePopup = () => {
+        setIsPopupOpen(false);
+        resetForm();
+    };
+
+    const handleEdit = (row: {
+        roleId: any;
+        roleName: any;
+        isActive: any;
+        auditTrialId: any,
+        mediaLink: any
+    }) => {
+        const isActive = row.isActive === "Active" ? true : false;
+        setFormData({
+            roleId: row.roleId,
+            roleName: row.roleName || '',
+            auditTrialId: row.auditTrialId,
+            mediaLink: row.mediaLink || '',
+            isActive: isActive,
+            action: 'edit' // Optional: Use this if you need to distinguish between actions
+        });
+        setIsEditMode(true);
+        setIsPopupOpen(true);
+    };
+
+    const debouncedCheckRoleName = useCallback(
+        debounce(async (value: string, dispatch, setNameExistsError) => {
+            try {
+                const exists = await dispatch(checkRoleNameExists(value)).unwrap();
+
+                // Set error message based on availability
+                setNameExistsError((prevErrors: any) => ({
+                    ...prevErrors,
+                    roleName: exists
+                        ? "Role Name already taken!" // Red error
+                        : "Role Name Available", // Green message
+                }));
+            } catch (error) {
+                console.error("Error checking roleName:", error);
+            }
+        }, 500),
+        []
+    );
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+
+        // Mapping to convert select options to boolean values
+        const booleanFields: Record<string, string> = {
+            isActive: "Active",
+        };
+        setFormData({
+            ...formData,
+            [name]: booleanFields[name] ? value === booleanFields[name] : value,
+        });
+        // Clear the error for the current field as the user starts typing
+        setErrors((prevErrors: any) => ({
+            ...prevErrors,
+            [name]: "", // Reset error when the user starts typing
+        }));
+
+        // Debounced check for RoleName
+        // Trigger debounced check for RoleName only if it's the relevant field
+        if (name === "roleName" && value.trim().length > 2) {
+            debouncedCheckRoleName(value, dispatch, setNameExistsError);
+        }
+    };
+
+    const handleSave = () => {
+        const newRoleData = {
+            roleName: formData.roleName,
+            isActive: formData.isActive ? true : false,
+            mediaLink: formData.mediaLink
+        };
+        dispatch(createRole(newRoleData))
+        // Close the popup
+        closePopup();
+    };
+
+    const handleUpdate = async () => {
+        const updatedRoleData = {
+            roleId: formData.roleId,  // Use the ID of the entry being edited
+            roleName: formData.roleName,
+            mediaLink: formData.mediaLink,
+            auditTrialId: formData.auditTrialId,
+            isActive: formData.isActive
+        };
+        await dispatch(updateRole(updatedRoleData));
+        dispatch(getAllRole({}));
+        closePopup();
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        validateFieldOnBlur(e, formData, validationRules, setErrors);
+    };
+
+    return (
+        <>
+            <FlexibleTable
+                data={roleData}
+                columns={roleTableConfig}
+                defaultItemsPerPage={10}
+                tableName='Add Role'
+                createNewFn={handleAdd}
+                actionFn={handleEdit}
+
+            />
+            {isPopupOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-800 bg-opacity-50">
+                    <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+                        <h2 className="text-xl font-semibold mb-6 text-gray-800 flex justify-between">
+                            {isEditMode ? "Update Role" : "Add Role"}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" onClick={closePopup} className="bi bi-x cursor-pointer" viewBox="0 0 16 16">
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </h2>
+                        <div className="space-y-4">
+                            <div className="flex-1">
+                                <label className="text-sm">
+                                    Role Name <span className="text-red-500">*</span>
+                                </label>
+                                {/* <Input
+                                    name="roleName"
+                                    value={formData.roleName ?? ""}
+                                    placeholder="Enter Role Name"
+                                    onChange={handleInputChange}
+                                    onBlur={handleBlur}
+                                    className="mt-2   border-solid rounded-md text-sm  border-gray-300 text-gray-700"
+                                />
+                                {errors.roleName && (
+                                    <p
+                                        className={`pt-2 text-sm ${errors.roleName === "Role Name is required" ||
+                                                errors.roleName === "Role Name already taken!"
+                                                ? "text-red-500" // Red color for errors
+                                                : "text-green-500" // Green color for success
+                                            }`}>
+                                        {errors.roleName}
+                                    </p>
+                                )} */}
+                                <div className="relative">
+                                    <Input
+                                        name="roleName"
+                                        value={formData.roleName}
+                                        placeholder="Enter Role Name"
+                                        onChange={handleInputChange ?? ""}
+                                        onBlur={handleBlur}
+                                        className="mt-2 text-gray-700 rounded-md border-solid border-gray-300 px-3 py-2 text-sm"
+                                    />
+                                    {/* Show icon and message only if roleName is not empty */}
+                                    {formData.roleName.trim() !== "" && nameExistsError.roleName && (
+                                        <>
+                                            {nameExistsError.roleName === "Role Name already taken!" ? (
+                                                <AiOutlineCloseCircle
+                                                    className="absolute fill-current text-red-500 right-[1px] top-1/3 transform -translate-y-1/2 bg-red-50 rounded-full mx-1"
+                                                />
+                                            ) : (<FaRegCheckCircle className="absolute fill-current text-green-500 right-[1px] top-1/3 transform -translate-y-1/2 bg-red-50 rounded-full mx-1"
+                                            />
+                                            )}
+                                            <p className={`pt-2 text-sm ${nameExistsError.roleName === "Role Name already taken!"
+                                                ? "text-red-500"
+                                                : "text-green-500"
+                                                }`} >
+                                                {nameExistsError.roleName}
+                                            </p>
+                                        </>
+                                    )}
+                                    {/* Display validation error if any */}
+                                    {errors.roleName && (
+                                        <p className="pt-2 text-red-500 text-sm">{errors.roleName}</p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="flex-1">
+                                <label className="text-sm">
+                                    Media Link
+                                </label>
+                                <Input
+                                    name="mediaLink"
+                                    value={formData.mediaLink ?? ""}
+                                    placeholder="Enter Media Link"
+                                    onChange={handleInputChange}
+                                    className="mt-2   border-solid rounded-md text-sm  border-gray-300 text-gray-700"
+                                />
+                            </div>
+
+                            <div className="flex-1">
+                                <label className="text-sm">
+                                    Status
+                                </label>
+                                <select
+                                    name="isActive"
+                                    value={formData.isActive ? "Active" : "Inactive"}
+                                    onChange={handleInputChange}
+                                    className="mt-2 bg-zinc-100 border border-gray-300 focus:border-blue-700 text-gray-700 text-black text-sm p-2 rounded w-full"
+                                >
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="mt-10 flex justify-center space-x-4">
+                            <Button onClick={isEditMode ? handleUpdate : handleSave} className="w-full bg-blue-500 text-white px-6 py-2 shadow-lg   text-white" disabled={isSaveDisabled(formData, validationRules)}>
+                                <IoSaveOutline className="text-lg mr-2" />
+                                {isEditMode ? "Update" : "Save"}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+        </>
+    )
+}

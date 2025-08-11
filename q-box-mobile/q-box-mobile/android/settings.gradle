@@ -1,0 +1,25 @@
+pluginManagement {
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }
+    settings.ext.flutterSdkPath = flutterSdkPath()
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
+
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+// This 'plugins' block should be empty or removed if it only contained the flutter-plugin-spec
+// as it's handled by the includeBuild statement above.
+plugins {
+    // No explicit plugin declarations here for Flutter's internal plugins
+}
+
+include ":app"
